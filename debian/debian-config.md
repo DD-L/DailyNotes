@@ -189,3 +189,56 @@ sudo apt-get install debootstrap
 # debootstrap --arch i386 trusty /mnt
 debootstrap --foreign --arch mipsel wheezy ./debian
 </pre>
+
+BOA web server
+=================
+
+<pre><code>
+$ # 资料： 
+$ # http://blog.sina.com.cn/s/blog_9e7fb3070101gumj.html
+$ # http://blog.csdn.net/handyhuang/article/details/17127583
+$ 
+$ apt-get install byacc bison flex
+$ apt-get install logrotate mime-support
+$ wget http://www.boa.org/boa-0.94.13.tar.gz
+$ tar zxvf boa-0.94.13.tar.gz
+$ cd boa-0.94.13
+
+$ mkdir /opt/boa
+$ #sudo chown deel /opt/boa
+
+$ # 修改 src/defines.h SERVER_ROOT 
+$ # #define SERVER_ROOT /opt/boa
+$ cd src
+$ ./configure
+$ make
+util.c: In function ‘get_commonlog_time’:
+util.c:100:1: error: pasting "t" and "->" does not give a valid preprocessing token
+make: *** [util.o] Error 1
+$ make clean
+$ # 修改 
+$ vi src/compat.h
+$ # #define TIMEZONE_OFFSET(foo) foo##->tm_gmtoff
+$ # ->
+$ # #define TIMEZONE_OFFSET(foo) (foo)->tm_gmtoff
+$ make 
+
+$ # 配置 BOA 
+$ cp boa.conf /opt/boa/
+$ mkdir /opt/www
+$ sudo chown deel /opt/www 
+$ 
+$ mkdir /opt/boa/lib
+$ cp src/boa_indexer /opt/boa/lib/
+$ cp boa /opt/boa/
+$ 
+$ sudo mkdir /var/log/boa/
+$ # sudo chown deel /var/log/boa/
+$
+$ vi /opt/boa/boa.conf
+$ ##########################
+$ Port 8080
+$ DocumentRoot /opt/www
+$ DirectoryMaker /opt/boa/lib/boa_indexer
+$ ##########################
+</code></pre>
