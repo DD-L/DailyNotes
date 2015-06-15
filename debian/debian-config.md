@@ -1,7 +1,7 @@
 debian 7.8:(netinst)
 ===========
 
-###download
+download
 
 一个小型安装映像：可以被很快的下载到您的计算机，并须要把它复制到可删除的媒介，如光盘、U 盘等。安装过程中，您的计算机需要互联网连线。
 
@@ -11,6 +11,7 @@ via https://www.debian.org/distrib/
 
 硬件配置(VM)
 ========
+
 <pre>
 Memory			512MB
 Processors		4
@@ -21,6 +22,7 @@ Network Adapter		Bridged(Automatic)
 
 Network
 =======
+
 <pre>
 http://www.cnblogs.com/lizunicon/p/3798122.html
 
@@ -33,6 +35,7 @@ iface eth0 inet dhcp
 
 软件源:
 =======
+
 <pre><code>
 /etc/apt/sources.list
 
@@ -52,7 +55,8 @@ deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free 
 apt-get update
 </code></pre>
 
-#语言配置
+语言配置
+=======
 
 <pre>
 dpkg-reconfigure locales
