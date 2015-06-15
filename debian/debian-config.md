@@ -10,7 +10,7 @@ http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netins
 via https://www.debian.org/distrib/
 
 硬件配置(VM)
-========
+============
 
 <pre>
 Memory			512MB
@@ -56,7 +56,7 @@ apt-get update
 </code></pre>
 
 语言配置
-=======
+=========
 
 <pre>
 dpkg-reconfigure locales
@@ -82,7 +82,7 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 </code></pre>
 
 更新libc库，以便小米提供的toolchain能跑起来
-=======================================
+==============================================
 
 <pre><code>
 apt-get update
@@ -117,14 +117,14 @@ chmod 0440 /etc/sudoers
 </pre>
 
 dos2unix
-========
+=========
 
 <pre>
 apt-get install dos2unix
 </pre>
 
 git
-===
+====
 
 <pre>
 apt-get install git
@@ -145,7 +145,7 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 
 arm-test
-========
+=========
 
 <pre>
 $ arm-g++ main.cpp -o main_test
@@ -180,7 +180,7 @@ sudo apt-get install tree
 </pre>
 
 debootstrap
-===========
+============
 
 <pre>
 sudo apt-get install debootstrap
