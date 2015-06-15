@@ -54,7 +54,6 @@ apt-get update
 
 #语言配置
 
-
 <pre>
 dpkg-reconfigure locales
 
@@ -68,6 +67,7 @@ LANGUAGE="zh_CN:zh"
 
 ssh server:
 ============
+
 <pre><code>
 apt-get install openssh-server
 #apt-get update
@@ -77,16 +77,16 @@ vi /etc/ssh/sshd_config # 参考http://www.jb51.net/os/Ubuntu/161384.html
 Subsystem sftp /usr/lib/openssh/sftp-server
 </code></pre>
 
-#更新libc库，以便小米提供的toolchain能跑起来
-
+更新libc库，以便小米提供的toolchain能跑起来
+=======================================
 
 <pre><code>
 apt-get update
 apt-get install libc6
 </code></pre>
 
-#/etc/profile
-
+/etc/profile
+============
 
 <pre><code>
 # added by D_L
@@ -99,8 +99,8 @@ alias 'arm-gcc=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-gcc'
 alias 'arm-g++=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-g++'
 </code></pre>
 
-#sudo
-
+sudo
+====
 
 <pre>
 apt-get install sudo
@@ -138,8 +138,6 @@ apt-get install ctags
 git clone git://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 </pre>
-
-
 
 
 arm-test
