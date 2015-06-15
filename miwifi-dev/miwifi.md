@@ -113,7 +113,7 @@ $ # 还有一个方法：http://www.right.com.cn/forum/thread-101737-1-1.html
 $ # 在电脑上安装debootstrap, 然后下载对应版本的debian,放到openwrt上去
 $ # 回到电脑主机上：
 $ mkdir /tmp/debian_mips
-$ cd /tmp/debian_mip
+$ cd /tmp/debian_mips
 $ sudo apt-get install debootstrap
 $ # 提示说 debootstrap  安装失败，找不到http://cn.archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.53ubuntu0.2_all.deb
 $ # 于是手动下载版本接近的debootstrap

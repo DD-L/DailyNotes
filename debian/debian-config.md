@@ -51,8 +51,10 @@ deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free 
 
 apt-get update
 </code></pre>
+
 语言配置
-=========
+=======
+
 <pre>
 dpkg-reconfigure locales
 
@@ -76,7 +78,8 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 </code></pre>
 
 更新libc库，以便小米提供的toolchain能跑起来
-===========================================
+=======================================
+
 <pre><code>
 apt-get update
 apt-get install libc6
@@ -84,6 +87,7 @@ apt-get install libc6
 
 /etc/profile
 ============
+
 <pre><code>
 # added by D_L
 alias 'll=ls -al --color'
@@ -97,6 +101,7 @@ alias 'arm-g++=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-g++'
 
 sudo
 ====
+
 <pre>
 apt-get install sudo
 chmod +w /etc/sudoers
@@ -106,14 +111,17 @@ username     ALL=(ALL) ALL
 username 为要设置的用户名
 chmod 0440 /etc/sudoers
 </pre>
+
 dos2unix
 ========
+
 <pre>
 apt-get install dos2unix
 </pre>
 
 git
 ===
+
 <pre>
 apt-get install git
 </pre>
@@ -121,6 +129,7 @@ apt-get install git
 
 .vimrc
 ======
+
 <pre>
 apt-get install vim
 https://github.com/amix/vimrc
@@ -135,6 +144,7 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 arm-test
 ========
+
 <pre>
 $ arm-g++ main.cpp -o main_test
 mipsel-openwrt-linux-uclibc-g++: warning: environment variable 'STAGING_DIR' not defined
@@ -154,19 +164,22 @@ export STAGING_DIR=/home/deel/miwifi-dev/sdk_package
 </pre>
 
 xz
-==
+===
+
 <pre>
 sudo apt-get install xz-utils
 </pre>
 
 tree
 ====
+
 <pre>
 sudo apt-get install tree
 </pre>
 
 debootstrap
 ===========
+
 <pre>
 sudo apt-get install debootstrap
 
