@@ -1,5 +1,5 @@
 debian 7.8:(netinst)
-===========
+=====================
 
 download
 
@@ -10,7 +10,7 @@ http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netins
 via https://www.debian.org/distrib/
 
 硬件配置(VM)
-============
+=============
 
 <pre>
 Memory			512MB
@@ -56,7 +56,7 @@ apt-get update
 </code></pre>
 
 语言配置
-=========
+==========
 
 <pre>
 dpkg-reconfigure locales
@@ -90,7 +90,7 @@ apt-get install libc6
 </code></pre>
 
 /etc/profile
-============
+==============
 
 <pre><code>
 # added by D_L
@@ -104,7 +104,7 @@ alias 'arm-g++=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-g++'
 </code></pre>
 
 sudo
-====
+=====
 
 <pre>
 apt-get install sudo
@@ -117,7 +117,7 @@ chmod 0440 /etc/sudoers
 </pre>
 
 dos2unix
-=========
+==========
 
 <pre>
 apt-get install dos2unix
@@ -132,7 +132,7 @@ apt-get install git
 
 
 .vimrc
-======
+=======
 
 <pre>
 apt-get install vim
@@ -145,7 +145,7 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 
 arm-test
-=========
+==========
 
 <pre>
 $ arm-g++ main.cpp -o main_test
@@ -173,7 +173,7 @@ sudo apt-get install xz-utils
 </pre>
 
 tree
-====
+=====
 
 <pre>
 sudo apt-get install tree
