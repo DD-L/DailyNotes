@@ -52,8 +52,8 @@ deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free 
 apt-get update
 </code></pre>
 
-语言配置
-=======
+#语言配置
+
 
 <pre>
 dpkg-reconfigure locales
@@ -77,16 +77,16 @@ vi /etc/ssh/sshd_config # 参考http://www.jb51.net/os/Ubuntu/161384.html
 Subsystem sftp /usr/lib/openssh/sftp-server
 </code></pre>
 
-更新libc库，以便小米提供的toolchain能跑起来
-=======================================
+#更新libc库，以便小米提供的toolchain能跑起来
+
 
 <pre><code>
 apt-get update
 apt-get install libc6
 </code></pre>
 
-/etc/profile
-============
+#/etc/profile
+
 
 <pre><code>
 # added by D_L
@@ -99,8 +99,8 @@ alias 'arm-gcc=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-gcc'
 alias 'arm-g++=$MIWIFI_TC_HOME/bin/mipsel-openwrt-linux-uclibc-g++'
 </code></pre>
 
-sudo
-====
+#sudo
+
 
 <pre>
 apt-get install sudo
