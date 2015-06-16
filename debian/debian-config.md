@@ -230,7 +230,7 @@ $ sudo chown deel /opt/www
 $ 
 $ mkdir /opt/boa/lib
 $ cp src/boa_indexer /opt/boa/lib/
-$ cp boa /opt/boa/
+$ cp src/boa /opt/boa/
 $ 
 $ sudo mkdir /var/log/boa/
 $ # sudo chown deel /var/log/boa/

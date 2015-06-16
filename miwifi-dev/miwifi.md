@@ -261,3 +261,85 @@ fi
 # chroot
 chroot /extdisks/sda1/miwifi/debian /bin/bash
 </code></pre>
+
+#####3.6 配置boa web server
+<pre><code>
+$ mount -o bind /proc /extdisks/sda1/miwifi/debian/proc
+$ mount -o bind /dev /extdisks/sda1/miwifi/debian/dev
+$ chroot /extdisks/sda1/miwifi/debian /bin/bash
+
+$ apt-get install byacc bison flex
+$ apt-get install logrotate mime-support
+$ cd /tmp
+$ wget http://www.boa.org/boa-0.94.13.tar.gz
+$ tar zxvf boa-0.94.13.tar.gz
+$ cd boa-0.94.13
+$ mkdir /opt/boa
+$ # 修改 src/defines.h SERVER_ROOT 
+$ # 	#define SERVER_ROOT /opt/boa
+$ # 修改src/compat.h
+$ # 	#define TIMEZONE_OFFSET(foo) foo##->tm_gmtoff
+$ # 	->
+$ # 	#define TIMEZONE_OFFSET(foo) (foo)->tm_gmtoff
+$ cd src
+$  ./configure
+$ make
+
+$ # 配置 BOA 
+$ cp boa.conf /opt/boa/
+$ mkdir /opt/www
+$ sudo chown deel /opt/www 
+$ 
+$ mkdir /opt/boa/lib
+$ cp src/boa_indexer /opt/boa/lib/
+$ cp src/boa /opt/boa/
+$ 
+$ sudo mkdir /var/log/boa/
+$ # sudo chown deel /var/log/boa/
+$
+$ vi /opt/boa/boa.conf
+$ ##########################
+$ Port 8080
+$ DocumentRoot /opt/www
+$ DirectoryMaker /opt/boa/lib/boa_indexer
+$ ScriptAlias /cgi-bin/ /opt/www/cgi-bin/
+$ ##########################
+$ #执行./boa时如果出现 "gethostbyname:: Success"， 则还要修改
+$ #/opt/boa/boa.conf 中的 ServerName
+$ hostname
+XiaoQiang
+$ vi /opt/boa/boa.conf
+$ # ServerName XiaoQiang
+</code></pre>
+
+#####3.6 配置uPnP
+
+<pre><code>
+$ # 资料： http://www.cnblogs.com/cslunatic/p/4259912.html
+$ cd /extdisks/sda1/miwifi/download
+$ wget http://downloads.openwrt.org/barrier_breaker/14.07/ramips/mt7620a/packages/packages/libminiupnpc_1.9-1_ramips_24kec.ipk
+$ wget http://downloads.openwrt.org/barrier_breaker/14.07/ramips/mt7620a/packages/packages/miniupnpc_1.9-1_ramips_24kec.ipk
+$ opkg -d usb install libminiupnpc_1.9-1_ramips_24kec.ipk
+$ opkg -d usb install miniupnpc_1.9-1_ramips_24kec.ipk
+$ ifconfig br-lan
+$ # inet addr:192.168.2.108
+
+$ upnpc  -a 192.168.2.108 80 8008 TCP
+upnpc : miniupnpc library test client. (c) 2005-2013 Thomas Bernard
+Go to http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
+for more information.
+List of UPNP devices found on the network :
+ desc: http://192.168.2.1:1900/igd.xml
+ st: urn:schemas-upnp-org:device:InternetGatewayDevice:1
+
+Found valid IGD : http://192.168.2.1:1900/ipc
+Local LAN ip address : 192.168.2.108
+ExternalIPAddress = 192.168.1.4
+InternalIP:Port = 192.168.2.108:80
+external 192.168.1.4:8008 TCP is redirected to internal 192.168.2.108:80 (duration=0)
+
+
+
+$ #配置好web server 后， 可以执行 upnpc  -a 192.168.2.108 8080 8009 TCP
+$ 就可以在 上一层网络访问内网的http://192.168.2.108:8080 了
+</code></pre>
