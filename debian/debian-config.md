@@ -242,3 +242,21 @@ $ DocumentRoot /opt/www
 $ DirectoryMaker /opt/boa/lib/boa_indexer
 $ ##########################
 </code></pre>
+
+## bzip2
+<pre><code>
+$ apt-get install bzip2
+</code></pre>
+
+## nmap
+<pre><code>
+$ # http://nmap.org/download.html
+$ wget https://nmap.org/dist/nmap-6.49BETA2.tar.bz2
+$ bzip2 -cd nmap-6.49BETA2.tar.bz2 | tar xvf -
+$ cd nmap-6.49BETA2
+$ ./configure
+$ sudo make clean
+$ find . -name "*" | xargs -I '{}' touch '{}'
+$ sudo make
+$ sudo make install
+</code></pre>
