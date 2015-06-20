@@ -260,3 +260,52 @@ $ find . -name "*" | xargs -I '{}' touch '{}'
 $ sudo make
 $ sudo make install
 </code></pre>
+
+## python3
+<pre><code>
+apt-get install python3-pip
+apt-get install python3-dev
+</code></pre>
+
+## netstat -ano
+
+## Apache
+<pre><code>
+$ apt-get install apache2 apache2-utils
+$ /etc/init.d/apache2 start
+$ # /etc/init.d/apache2 
+$ #Usage: apache2 {start|stop|graceful-stop|restart|reload|force-reload|start-htcacheclean|stop-htcacheclean}
+$ # 配置
+</code></pre>
+
+## mod_wsgi
+<pre><code>
+$ # https://pypi.python.org/pypi/mod_wsgi
+$ #apt-get install apache2-mpm-prefork apache2-prefork-dev
+$ #wget https://pypi.python.org/packages/source/m/mod_wsgi/mod_wsgi-4.4.13.tar.gz
+$ apt-get update
+$ apt-get upgrade
+$ apt-get install libapache2-mod-wsgi
+$ mkdir /var/run/apache2/wsgi
+$ vi /etc/apache2/mods-available/wsgi.conf
+WSGISocketPrefix /var/run/apache2/wsgi
+WSGIScriptAlias /wsgi "/var/www/html/application.py"
+
+# '''application.py'''
+# def application(environ, start_response):
+#    status = '200 OK'
+#    output = 'Hello World!'
+#    response_headers = [('Content-type', 'text/plain'),
+#                        ('Content-Length', str(len(output)))]
+#    start_response(status, response_headers)
+#
+#    return [output]
+
+$ /etc/init.d/apache2 restart
+$ curl http://hostname:port/wsgi
+</code></pre>
+
+## curl
+<pre><code>
+$ apt-get install curl
+</code></pre>
