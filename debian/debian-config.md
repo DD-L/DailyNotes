@@ -244,16 +244,19 @@ $ ##########################
 </code></pre>
 
 ## curl
+
 <pre><code>
 $ apt-get install curl
 </code></pre>
 
 ## bzip2
+
 <pre><code>
 $ apt-get install bzip2
 </code></pre>
 
 ## nmap
+
 <pre><code>
 $ # http://nmap.org/download.html
 $ wget https://nmap.org/dist/nmap-6.49BETA2.tar.bz2
@@ -267,15 +270,18 @@ $ sudo make install
 </code></pre>
 
 ## python3
-<pre><code>
+
+pre><code>
 apt-get install python3-pip
 apt-get install python3-dev
 </code></pre>
 
 ## netstat -ano
+
 <pre></pre>
 
 ## Apache
+
 <pre><code>
 $ apt-get install apache2 apache2-utils
 $ /etc/init.d/apache2 start
@@ -295,6 +301,7 @@ Server built:   Mar 15 2015 09:51:43
 
 ## mod_wsgi
 =============
+
 <pre><code>
 $ # https://pypi.python.org/pypi/mod_wsgi
 $ #apt-get install apache2-mpm-prefork apache2-prefork-dev
@@ -487,7 +494,7 @@ $ ln mods-available/ssl.load mods-enabled/ssl.load
 $ # 重启apache， 浏览器安装server.crt证书即可
 </code></pre>
 
-## apache 虚拟主机
+## apache VirtualHost
 <pre><code>
 $ # http://jingyan.baidu.com/article/363872ec870f6e6e4ba16feb.html
 $ # 基于多端口的虚拟主机配置
