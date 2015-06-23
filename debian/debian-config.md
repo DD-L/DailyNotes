@@ -273,6 +273,7 @@ apt-get install python3-dev
 </code></pre>
 
 ## netstat -ano
+<pre></pre>
 
 ## Apache
 <pre><code>
@@ -293,6 +294,7 @@ Server built:   Mar 15 2015 09:51:43
 </code></pre>
 
 ## mod_wsgi
+=============
 <pre><code>
 $ # https://pypi.python.org/pypi/mod_wsgi
 $ #apt-get install apache2-mpm-prefork apache2-prefork-dev
@@ -485,7 +487,7 @@ $ ln mods-available/ssl.load mods-enabled/ssl.load
 $ # 重启apache， 浏览器安装server.crt证书即可
 </code></pre>
 
-## apache 虚拟主机配置
+## apache 虚拟主机
 <pre><code>
 $ # http://jingyan.baidu.com/article/363872ec870f6e6e4ba16feb.html
 $ # 基于多端口的虚拟主机配置
@@ -505,10 +507,9 @@ DocumentRoot /var/www/8080_html
 ErrorLog ${APACHE_LOG_DIR}/error_8080.log
 CustomLog ${APACHE_LOG_DIR}/access_8080.log combined
 ln sites-available/site_8080.conf sites-enabled/site_8080.conf
-</code></pre>
-
-## 配置几个虚拟主机
-<pre><code>
+$
+$
+$
 $ # port 80:
 $ # 在 wsgi.conf 中删除之前配置的一行：
 $ # 因为在这里配置等于是全局配置，会影响所有虚拟主机站点
@@ -528,6 +529,8 @@ $ ...apt-get install php5 php-pear
 $ #/etc/php5/apache2/php.ini
 $ # mkdir /var/log/php
 $ #apt-get install php5-mysql
+$ # 启用mysqli支持
+$ # ..
 $ #service apache2 restart
 </code>/pre>
 
