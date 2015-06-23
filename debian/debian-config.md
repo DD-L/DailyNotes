@@ -243,6 +243,11 @@ $ DirectoryMaker /opt/boa/lib/boa_indexer
 $ ##########################
 </code></pre>
 
+## curl
+<pre><code>
+$ apt-get install curl
+</code></pre>
+
 ## bzip2
 <pre><code>
 $ apt-get install bzip2
@@ -276,6 +281,15 @@ $ /etc/init.d/apache2 start
 $ # /etc/init.d/apache2 
 $ #Usage: apache2 {start|stop|graceful-stop|restart|reload|force-reload|start-htcacheclean|stop-htcacheclean}
 $ # 配置
+$ # ...
+$ # http://www.laozuo.org/3423.html
+$ # url重写（伪静态）默认APACHE是没有安装的,需要执行脚本（as root）启动rewrite： 
+$ # a2enmod rewrite 
+$
+$
+$ /usr/sbin/apache2 -v
+Server version: Apache/2.4.10 (Debian)
+Server built:   Mar 15 2015 09:51:43
 </code></pre>
 
 ## mod_wsgi
@@ -293,8 +307,9 @@ WSGIScriptAlias /wsgi "/var/www/html/application.py"
 
 # '''application.py'''
 # def application(environ, start_response):
+#    import sys
 #    status = '200 OK'
-#    output = 'Hello World!'
+#    output = 'Hello World!\n' + sys.version + '\n'
 #    response_headers = [('Content-type', 'text/plain'),
 #                        ('Content-Length', str(len(output)))]
 #    start_response(status, response_headers)
@@ -303,9 +318,223 @@ WSGIScriptAlias /wsgi "/var/www/html/application.py"
 
 $ /etc/init.d/apache2 restart
 $ curl http://hostname:port/wsgi
+$ # 此时显示wsgi 的python版本为2.x
+$ # 若想改为python3.x, 升级 wsgi版本即可, 或用pip3直接装:
+$ pip3 install mod_wsgi
+$ /usr/local/bin/mod_wsgi-express install-module
+LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi-py34.cpython-34m.so
+WSGIPythonHome /usr
+$ vi /etc/apache2/mods-available/wsgi.load
+# python 2.x
+#LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
+# python 3.x
+LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi-py34.cpython-34m.so
+$ /etc/init.d/apache2 restart
+$ #/var/www/html/application.py 还要增加一句：
++ output = output.encode("UTF-8")
+
+$ # 下面给出更全的例子：
+$ cat application.py
+<pre>
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+def application(environ, start_response):
+    status = '200 OK'
+    response_body = ['%s: %s' % (key, value)
+            for key, value in sorted(environ.items())]
+    response_body = '\n'.join(response_body)
+
+    py_version = sys.version
+    response_body = response_body + '\n\npython version: ' + py_version
+
+    response_body  = response_body.encode("UTF-8")
+    response_headers = [('Content-type', 'text/plain'),
+                        ('Content-Length', str(len(response_body)))]
+    start_response(status, response_headers)
+
+    return [response_body]
+</pre>
+$ curl http://localhost:80/wsgi
+<pre><code>
+CONTEXT_DOCUMENT_ROOT: /var/www/html
+CONTEXT_PREFIX: 
+DOCUMENT_ROOT: /var/www/html
+GATEWAY_INTERFACE: CGI/1.1
+HTTP_ACCEPT: */*
+HTTP_HOST: localhost
+HTTP_USER_AGENT: curl/7.38.0
+PATH_INFO: 
+QUERY_STRING: 
+REMOTE_ADDR: ::1
+REMOTE_PORT: 41347
+REQUEST_METHOD: GET
+REQUEST_SCHEME: http
+REQUEST_URI: /wsgi
+SCRIPT_FILENAME: /var/www/html/application.py
+SCRIPT_NAME: /wsgi
+SERVER_ADDR: ::1
+SERVER_ADMIN: webmaster@localhost
+SERVER_NAME: localhost
+SERVER_PORT: 80
+SERVER_PROTOCOL: HTTP/1.1
+SERVER_SIGNATURE: <address>Apache/2.4.10 (Debian) Server at localhost Port 80</address>
+
+SERVER_SOFTWARE: Apache/2.4.10 (Debian)
+apache.version: (2, 4, 10)
+mod_wsgi.application_group: 127.0.1.1|/wsgi
+mod_wsgi.callable_object: application
+mod_wsgi.enable_sendfile: 0
+mod_wsgi.handler_script: 
+mod_wsgi.listener_host: 
+mod_wsgi.listener_port: 80
+mod_wsgi.path_info: 
+mod_wsgi.process_group: 
+mod_wsgi.request_handler: wsgi-script
+mod_wsgi.request_start: 1434638287726480
+mod_wsgi.script_name: /wsgi
+mod_wsgi.script_reloading: 1
+mod_wsgi.script_start: 1434638287727008
+mod_wsgi.version: (4, 4, 13)
+wsgi.errors: <_io.TextIOWrapper encoding='utf-8'>
+wsgi.file_wrapper: <class 'mod_wsgi.FileWrapper'>
+wsgi.input: <mod_wsgi.Input object at 0x7fd62839e6c0>
+wsgi.multiprocess: True
+wsgi.multithread: True
+wsgi.run_once: False
+wsgi.url_scheme: http
+wsgi.version: (1, 0)
+
+python version: 3.4.2 (default, Oct  8 2014, 10:47:48) 
+[GCC 4.9.1]
+</code></pre>
 </code></pre>
 
-## curl
+## gevent/gevent-websocket
 <pre><code>
-$ apt-get install curl
+$ # as root
+$ #pip3 install gevent greenlet gevent-websocket
+$ # python3下不能直接用pip(3)安装gevent
+$ # 这样安装出来的还是python2的版本(痛苦)
+$ pip3 freeze
+chardet==2.3.0
+colorama==0.3.2
+gevent==1.0.2
+gevent-websocket==0.9.5
+greenlet==0.4.7
+html5lib==0.999
+mod-wsgi==4.4.13
+requests==2.4.3
+six==1.8.0
+urllib3==1.9.1
+wheel==0.24.0
+$ pip3 uninstall gevent gevent-websocket greenlet
+$ # 先安装 cython
+$ apt-get install cython
+$ # 到这里下载源码https://github.com/fantix/gevent
+$ 然后 python3 setup.py install （as root）
+$ git clone https://github.com/fantix/gevent.git
+$ # or 
+$ # wget https://github.com/fantix/gevent/archive/master.zip
+$ python3 setup.py install
+Finished processing dependencies for gevent==1.1
+$ # run as root
+$ pip3 install gevent-websocket
+$ # 如果 from geventwebsocket.handler import WebSocketHandler 不报错即安装成功
+$ # https://pypi.python.org/pypi/gevent-websocket/
+
+$ #####################
+$ # 因为mod_wsgi和gevent互不兼容，故舍弃
+$ #####################
+</code></pre>
+
+## apache https
+<pre><code>
+$ # http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html
+$ # http://www.cnblogs.com/best-jobs/p/3298258.html
+$ # http://www.oschina.net/question/234345_42365
+$ find /usr/lib/apache2/modules/* -name "*ssl.so"
+/usr/lib/apache2/modules/mod_ssl.so
+$ openssl genrsa 1024 > server.key
+$ openssl req -new -key server.key > server.csr
+$ openssl req -x509 -days 366 -key server.key -in server.csr > server.crt
+$ chmod 400 server.crt  server.csr  server.key # as root
+$ # 'Listen 443' in ports.conf
+$ 
+$ mkdir /etc/apache2/ssl
+$ cp -a server.c* /etc/apache2/ssl/
+$ cp -a server.key /etc/apache2/ssl/
+$ mkdir  /var/www/ssl_html
+$ # chown deel /var/www/ssl_html
+$ cp /var/www/html/index.html /var/www/ssl_html/
+$ cp -a /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/site1-ssl.conf
+$ #cp -a  /etc/apache2/ssl/server.crt /var/www/ssl_html
+$ vi /etc/apache2/sites-enabled/site1-ssl.conf
+NameVirtualHost *:443
+< VirtualHost *:443 >
+DocumentRoot /var/www/ssl_html
+ErrorLog ${APACHE_LOG_DIR}/error_ssl.log
+CustomLog ${APACHE_LOG_DIR}/access_ssl.log combined
+SSLCertificateFile /etc/apache2/ssl/server.crt
+SSLCertificateKeyFile /etc/apache2/ssl/server.key
+
+$ vi /etc/apache2/mods-available/ssl.load
+$ # check "LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so"
+$ cd /etc/apache2
+$ ln mods-available/ssl.load mods-enabled/ssl.load
+$ # 重启apache， 浏览器安装server.crt证书即可
+</code></pre>
+
+## apache 虚拟主机配置
+<pre><code>
+$ # http://jingyan.baidu.com/article/363872ec870f6e6e4ba16feb.html
+$ # 基于多端口的虚拟主机配置
+$ # 80 端口 mod_wsgi (python3)
+$ # 443 端口 见 ‘apache https’
+$ # 8080 端口 (留给 php)
+
+$ # 80 和 443 主机已经配置好，只需新增8080即可
+$ cd /etc/apache2
+$ vi ports.conf
+Listen 8080
+$ cp sites-available/000-default.conf sites-available/site_8080.conf
+$ mkdir /var/www/8080_html
+$ vi sites-available/site_8080.conf
+<VirtualHost *:8080>
+DocumentRoot /var/www/8080_html
+ErrorLog ${APACHE_LOG_DIR}/error_8080.log
+CustomLog ${APACHE_LOG_DIR}/access_8080.log combined
+ln sites-available/site_8080.conf sites-enabled/site_8080.conf
+</code></pre>
+
+## 配置几个虚拟主机
+<pre><code>
+$ # port 80:
+$ # 在 wsgi.conf 中删除之前配置的一行：
+$ # 因为在这里配置等于是全局配置，会影响所有虚拟主机站点
+$ vi /etc/apache2/mods-available/wsgi.conf
+WSGIScriptAlias /wsgi "/var/www/html/application.py"
+$ # 改为在80端口的个虚拟主机上配置
+$ cd /etc/apache2
+$ vi sites-enabled/000-default.conf
+WSGIScriptAlias / "/var/www/html/application.py"
+$ # 其它端口同理可配
+</code></pre>
+
+## 安装 php
+<pre><code>
+$ # http://www.laozuo.org/3423.html
+$ ...apt-get install php5 php-pear
+$ #/etc/php5/apache2/php.ini
+$ # mkdir /var/log/php
+$ #apt-get install php5-mysql
+$ #service apache2 restart
+</code>/pre>
+
+## 安装 mysql
+<pre><code>
+$ # mysql 暂不安装，可以直接使用宿主机的mysql服务
+$ # apt-get install mysql-server
+$ #file: /etc/mysql/my.cnf
+$ # mysql_secure_installation
 </code></pre>
