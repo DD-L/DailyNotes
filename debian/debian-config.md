@@ -543,7 +543,7 @@ $ #apt-get install php5-mysql
 $ # 启用mysqli支持
 $ # ..
 $ #service apache2 restart
-</code>/pre>
+</code></pre>
 
 ##安装 mysql
 
