@@ -271,7 +271,7 @@ $ sudo make install
 
 ## python3
 
-pre><code>
+<pre><code>
 apt-get install python3-pip
 apt-get install python3-dev
 </code></pre>
@@ -281,6 +281,7 @@ apt-get install python3-dev
 <pre></pre>
 
 ## Apache
+==========
 
 <pre><code>
 $ apt-get install apache2 apache2-utils
