@@ -243,19 +243,19 @@ $ DirectoryMaker /opt/boa/lib/boa_indexer
 $ ##########################
 </code></pre>
 
-## curl
+##curl
 
 <pre><code>
 $ apt-get install curl
 </code></pre>
 
-## bzip2
+##bzip2
 
 <pre><code>
 $ apt-get install bzip2
 </code></pre>
 
-## nmap
+##nmap
 
 <pre><code>
 $ # http://nmap.org/download.html
@@ -269,19 +269,19 @@ $ sudo make
 $ sudo make install
 </code></pre>
 
-## python3
+##python3
 
 <pre><code>
 apt-get install python3-pip
 apt-get install python3-dev
 </code></pre>
 
-## netstat -ano
+##netstat -ano
 
 <pre></pre>
 
-## Apache
-==========
+
+##Apache
 
 <pre><code>
 $ apt-get install apache2 apache2-utils
@@ -300,8 +300,7 @@ Server version: Apache/2.4.10 (Debian)
 Server built:   Mar 15 2015 09:51:43
 </code></pre>
 
-## mod_wsgi
-=============
+##mod_wsgi
 
 <pre><code>
 $ # https://pypi.python.org/pypi/mod_wsgi
@@ -420,7 +419,8 @@ python version: 3.4.2 (default, Oct  8 2014, 10:47:48)
 </code></pre>
 </code></pre>
 
-## gevent/gevent-websocket
+##gevent/gevent-websocket
+
 <pre><code>
 $ # as root
 $ #pip3 install gevent greenlet gevent-websocket
@@ -459,6 +459,7 @@ $ #####################
 </code></pre>
 
 ## apache https
+
 <pre><code>
 $ # http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html
 $ # http://www.cnblogs.com/best-jobs/p/3298258.html
@@ -495,7 +496,8 @@ $ ln mods-available/ssl.load mods-enabled/ssl.load
 $ # 重启apache， 浏览器安装server.crt证书即可
 </code></pre>
 
-## apache VirtualHost
+##apache VirtualHost
+
 <pre><code>
 $ # http://jingyan.baidu.com/article/363872ec870f6e6e4ba16feb.html
 $ # 基于多端口的虚拟主机配置
@@ -530,7 +532,8 @@ WSGIScriptAlias / "/var/www/html/application.py"
 $ # 其它端口同理可配
 </code></pre>
 
-## 安装 php
+##安装 php
+
 <pre><code>
 $ # http://www.laozuo.org/3423.html
 $ ...apt-get install php5 php-pear
@@ -542,7 +545,8 @@ $ # ..
 $ #service apache2 restart
 </code>/pre>
 
-## 安装 mysql
+##安装 mysql
+
 <pre><code>
 $ # mysql 暂不安装，可以直接使用宿主机的mysql服务
 $ # apt-get install mysql-server
