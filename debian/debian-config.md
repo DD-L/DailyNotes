@@ -38,7 +38,7 @@ iface eth0 inet dhcp
 
 <pre><code>
 /etc/apt/sources.list
-
+<pre>
 # 考虑到7.x的libc库版本较低，于是就干脆装 8.x的包吧
 #debian 7.x (wheezy)
 #deb http://mirrors.aliyun.com/debian/ wheezy main non-free contrib
@@ -51,7 +51,7 @@ deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib
 deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib
 deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib
 deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib
-
+</pre>
 apt-get update
 </code></pre>
 
@@ -457,6 +457,7 @@ $ #####################
 ## apache https
 
 <pre><code>
+$ # ***** http://blog.csdn.net/lifetragedy/article/details/7699236 ******** <-----
 $ # http://www.onlamp.com/2008/03/04/step-by-step-configuring-ssl-under-apache.html
 $ # http://www.cnblogs.com/best-jobs/p/3298258.html
 $ # http://www.oschina.net/question/234345_42365
@@ -548,4 +549,25 @@ $ # mysql 暂不安装，可以直接使用宿主机的mysql服务
 $ # apt-get install mysql-server
 $ #file: /etc/mysql/my.cnf
 $ # mysql_secure_installation
+</code></pre>
+
+
+##autossh
+
+<pre><code>
+$ apt-get install autossh
+$ apt-get autoremove
+</code></pre>
+
+##7z
+
+<pre><code>
+$ apt-get install p7zip # 它会只安装7zr
+$ # 7zr x *.7z
+</code></pre>
+
+##gdb
+
+<pre><code>
+$ apt-get install gdb
 </code></pre>
