@@ -571,3 +571,9 @@ $ # 7zr x *.7z
 <pre><code>
 $ apt-get install gdb
 </code></pre>
+
+##pcre3-dev
+
+<pre><code>
+$ sudo apt-get install libpcre3-dev
+</code></pre>
