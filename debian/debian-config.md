@@ -267,10 +267,14 @@ $ sudo make install
 
 ##python3
 
-<pre><code>
-apt-get install python3-pip
-apt-get install python3-dev
-</code></pre>
+	apt-get install python3-pip
+	apt-get install python3-dev
+
+
+##pip for python 2.7.x
+
+	apt-get install python-pip
+
 
 ##netstat -ano
 
@@ -561,10 +565,9 @@ $ apt-get autoremove
 
 ##7z
 
-<pre><code>
-$ apt-get install p7zip # 它会只安装7zr
-$ # 7zr x *.7z
-</code></pre>
+	$ apt-get install p7zip # 它会只安装7zr
+	$ # 7zr x *.7z
+
 
 ##gdb
 
@@ -574,6 +577,9 @@ $ apt-get install gdb
 
 ##pcre3-dev
 
-<pre><code>
-$ sudo apt-get install libpcre3-dev
-</code></pre>
+	$ sudo apt-get install libpcre3-dev
+
+
+##python.pygments
+
+	$ sudo pip install pygments
