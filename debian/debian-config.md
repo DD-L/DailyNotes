@@ -618,7 +618,7 @@ ssh server:
 
 	# https://blog.linuxeye.com/399.html
 
-	以反向代理百度为例
+	以反向代理https://www.baidu.com 为例
 
 
 	$ nslookup www.baidu.com
@@ -627,17 +627,17 @@ ssh server:
 	Address:  114.114.114.114
 	
 	名称:    www.a.shifen.com
-	Addresses:  180.97.33.107
-		  180.97.33.108
+	Addresses:  180.97.33.108
+		  180.97.33.107
 	Aliases:  www.baidu.com
-	找到了两个百度的ip: 180.97.33.107 180.97.33.108
+	找到了两个百度的ip: 180.97.33.108 180.97.33.107
 
 	$ cd /opt/nginx
 	$ vi conf/nginx.conf
 
 	upstream baidu {
-		server 180.97.33.107:80 max_fails=3;
-		server 180.97.33.108:80 max_fails=3;
+		server 180.97.33.108:443 max_fails=3;
+		server 180.97.33.107:443 max_fails=3;
 	}
 	server {
 		listen       8000;
@@ -646,32 +646,34 @@ ssh server:
 		#rewrite ^(.*) http://192.168.2.107:8000$1 permanent;
 		location / {
 			#proxy_cache one;
-			#proxy_cache_valid  200 302 1h;
-			#proxy_cache_valid  404 1m;
-			#proxy_redirect https://www.baidu.com/ /;
-			#proxy_cookie_domain baidu.com localhost;
+			#proxy_cache_valid 200 302 1h;
+			#proxy_cache_valid 404 1m;
+
+			# 192.168.2.107 是反向代理服务器的地址或域名 
+			proxy_cookie_domain baidu.com 192.168.2.107;
+			proxy_redirect https://www.baidu.com/ /;
 			proxy_pass https://baidu;
 			proxy_set_header Host "www.baidu.com";
 			proxy_set_header Accept-Encoding "";
 			proxy_set_header User-Agent $http_user_agent;
 			proxy_set_header Accept-Language "zh-CN";
-			# proxy_set_header Cookie "PREF=ID=047808f19f6de346:U=0f62f33dd8549d11:FF=2:LD=zh-CN:NW=1:TM=1325338577:LM=1332142444:GM=1:SG=2:S=rE0SyJh2w1IQ-Maw";
-			# 192.168.2.107 是反向代理服务器的地址或域名
+			proxy_set_header Cookie "";
+
+			# 192.168.2.107 是反向代理服务器的地址或域名 
 			sub_filter www.baidu.com 192.168.2.107:8000 ;
 			sub_filter_once off;
-		}
 	}
 
 	1. 定义了个upstream baidu，放了2个baidu的ip（通过nslookup www.baidu.com命令获取), 如果不这样做，就等着被百度的验证码搞崩溃吧。
 	2. proxy_redirect https://www.baidu.com/ /; 这行的作用是把谷歌服务器返回的302响应头里的域名替换成自己的，不然浏览器还是会直接请求www.baidu.com，那样反向代理就失效了。
-	3. proxy_cookie_domain baidu.com localhost; 把cookie的作用域替换成我们的域名
+	3. proxy_cookie_domain baidu.com 192.168.2.107:8000; 把cookie的作用域替换成我们的域名
 	4. proxy_pass http://baidu; 反向代理到upstream baidu
 	5. proxy_set_header Accept-Encoding “”; 防止百度返回压缩的内容，因为压缩的内容无法作域名替换
 	6. proxy_set_header Accept-Language “zh-CN”;设置语言为中文
 	
 	# Cookie 以google 为例：
 	#7. proxy_set_header Cookie “PREF=ID=047808f19f6de346:U=0f62f33dd8549d11:FF=2:LD=zh-CN:NW=1:TM=1325338577:LM=1332142444:GM=1:SG=2:S=rE0SyJh2w1IQ-Maw”; 这行很关键，传固定的cookie给谷歌，是为了禁止即时搜索，因为开启即时搜索无法替换内容。还有设置为新窗口打开网站，这个符合我们打开链接的习惯
-	8. sub_filter www.baidu.com 192.168.2.107:8000 当然是把百度的域名替换成我们的了，注意需要安装nginx的sub_filter模块(编译加上–with-http_sub_module参数)
+	8. sub_filter www.baidu.com 192.168.2.107:8000 把百度的域名替换成当前主机的ip或域名，注意需要安装nginx的sub_filter模块(编译加上–with-http_sub_module参数)
 
 	启动nginx 测试效果
 	/opt/nginx/sbin/nginx
