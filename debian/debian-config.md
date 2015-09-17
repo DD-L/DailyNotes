@@ -650,7 +650,7 @@ ssh server:
 			#proxy_cache_valid  404 1m;
 			#proxy_redirect https://www.baidu.com/ /;
 			#proxy_cookie_domain baidu.com localhost;
-			proxy_pass http://baidu;
+			proxy_pass https://baidu;
 			proxy_set_header Host "www.baidu.com";
 			proxy_set_header Accept-Encoding "";
 			proxy_set_header User-Agent $http_user_agent;
