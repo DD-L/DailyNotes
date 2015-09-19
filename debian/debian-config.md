@@ -677,3 +677,57 @@ ssh server:
 
 	启动nginx 测试效果
 	/opt/nginx/sbin/nginx
+
+
+##nginx.conf 增加 自定义首页
+	
+	192.168.2.107:8000 为 nginx绑定的ip及端口
+	
+	方案一：
+	location = / {
+       return http://192.168.2.107:8000/deelroot/ ;
+    }
+
+	# proxy
+	location / {
+		#....
+	}
+
+	# deelroot
+	location ^~ /deelroot/ {
+		root html;
+		index index.html index.htm;
+	}
+
+	在 /opt/nginx/html 下执行：
+	$ mkdir deelroot
+	$ cp ./index.html ./deelroot/index.html
+
+	此时浏览器访问 http://192.168.2.107:8000
+	会自动跳转到 http://192.168.2.107:8000/deelroot/
+	
+	即返回的是 /opt/nginx/html/deelroot/index.html
+
+
+
+	方案二： （优选）
+	
+	rewrite ^/$ /deelroot/index.html break;
+	
+	# proxy
+	location / {
+		#....
+	}
+
+	# deelroot
+	location ^~ /deelroot/ {
+		root html;
+		index index.html index.htm;
+	}
+
+	在 /opt/nginx/html 下执行：
+	$ mkdir deelroot
+	$ cp ./index.html ./deelroot/index.html
+
+	此时浏览器访问 http://192.168.2.107:8000
+	会直接返回 /opt/nginx/html/deelroot/index.html, 没有任何跳转.
