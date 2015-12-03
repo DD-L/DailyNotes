@@ -731,3 +731,30 @@ ssh server:
 
 	此时浏览器访问 http://192.168.2.107:8000
 	会直接返回 /opt/nginx/html/deelroot/index.html, 没有任何跳转.
+
+## w3m --- a text-based web browser
+	
+	apt-get install w3m w3m-img -y
+	apt-get install zhcon -y 
+
+## zlib
+	
+	wget http://zlib.net/zlib-1.2.8.tar.gz
+	tar zxvf zlib-1.2.8.tar.gz
+	cd zlib-1.2.8
+	./configure
+	make test
+	sudo make install
+	sudo cp zutil.h /usr/local/include
+	sudo cp zutil.c /usr/local/include
+
+## make-4.1
+
+	wget http://ftp.gnu.org/gnu/make/make-4.1.tar.bz2
+	tar jxvf make-4.1.tar.bz2
+	cd make-4.1.tar
+	./configure
+	make
+	sudo make install
+
+	
