@@ -85,3 +85,34 @@ $ systemctl start docker
 $ # 若要开机时引导 docker 服务
 $ systemctl enable docker
 ```
+
+## vim
+
+```shell
+$ yum install vim
+$ mkdir ~/.vim
+$ vi ~/.vim/vimrc
+set nu
+set showmode
+set ruler
+set autoindent
+syntax on
+
+" 自动缩进
+set autoindent
+set cindent 
+" Tab键的宽度
+set tabstop=4
+" 统一缩进为4 
+set softtabstop=4
+set shiftwidth=4
+" 不要用空格代替制表符
+set noexpandtab
+
+" 侦测文件类型
+filetype on
+" 载入文件类型插件
+filetype plugin on
+" 为特定文件类型载入相关缩进文件
+filetype indent on
+```
