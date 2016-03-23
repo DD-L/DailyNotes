@@ -77,6 +77,11 @@ $ yum install git
 
 ## Docker
 
+更完整的方法：
+
+https://docs.docker.com/engine/installation/linux/centos/ [推荐]
+https://docs.docker.com/engine/installation/
+
 ```shell
 $ # Docker（重新编译自 RHEL 7）已收录在 CentOS-Extras 软件库内。只须执行
 $ yum install docker
