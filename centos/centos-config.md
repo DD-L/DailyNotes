@@ -77,6 +77,11 @@ $ yum install git
 
 ## Docker
 
+更完整的方法：
+
+https://docs.docker.com/engine/installation/linux/centos/ [推荐]
+https://docs.docker.com/engine/installation/
+
 ```shell
 $ # Docker（重新编译自 RHEL 7）已收录在 CentOS-Extras 软件库内。只须执行
 $ yum install docker
@@ -84,4 +89,57 @@ $ # 安装 docker 后，你必须引导该服务才能应用它
 $ systemctl start docker
 $ # 若要开机时引导 docker 服务
 $ systemctl enable docker
+```
+
+## vim
+
+```shell
+$ yum install vim
+$ mkdir ~/.vim
+$ vi ~/.vim/vimrc
+set nu
+set showmode
+set ruler
+set autoindent
+syntax on
+
+" 自动缩进
+set autoindent
+set cindent 
+" Tab键的宽度
+set tabstop=4
+" 统一缩进为4 
+set softtabstop=4
+set shiftwidth=4
+" 不要用空格代替制表符
+set noexpandtab
+
+" 侦测文件类型
+filetype on
+" 载入文件类型插件
+filetype plugin on
+" 为特定文件类型载入相关缩进文件
+filetype indent on
+```
+## wget
+
+```shell
+$ yum install wget
+```
+
+## http_load
+
+```shell
+$ # http_load 是一款体积很小的 web 压力测试工具
+$ # 最新版本在这里： http://www.acme.com/software/http_load/
+$ wget http://www.acme.com/software/http_load/http_load-09Mar2016.tar.gz
+$ tar xvf http_load-09Mar2016.tar.gz
+$ cd http_load-09Mar2016
+$ # 如果要使其支持 https, 修改 Makefile 并编译 OpenSSL.
+$ make
+$ make -p /usr/local/man/man1 
+$ make install
+$ cd ..
+$ rm -rf http_load-09Mar2016.tar.gz http_load-09Mar2016
+$ man http_load
 ```
