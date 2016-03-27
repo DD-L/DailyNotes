@@ -121,3 +121,25 @@ filetype plugin on
 " 为特定文件类型载入相关缩进文件
 filetype indent on
 ```
+## wget
+
+```shell
+$ yum install wget
+```
+
+## http_load
+
+```shell
+$ # http_load 是一款体积很小的 web 压力测试工具
+$ # 最新版本在这里： http://www.acme.com/software/http_load/
+$ wget http://www.acme.com/software/http_load/http_load-09Mar2016.tar.gz
+$ tar xvf http_load-09Mar2016.tar.gz
+$ cd http_load-09Mar2016
+$ # 如果要使其支持 https, 修改 Makefile 并编译 OpenSSL.
+$ make
+$ make -p /usr/local/man/man1 
+$ make install
+$ cd ..
+$ rm -rf http_load-09Mar2016.tar.gz http_load-09Mar2016
+$ man http_load
+```
