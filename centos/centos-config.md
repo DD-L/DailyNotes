@@ -131,7 +131,7 @@ $ yum install wget
 
 ```shell
 $ # http_load 是一款体积很小的 web 压力测试工具
-$ # 最新版本在这里： http://www.acme.com/software/http_load/
+$ # 最新版本在这里(更新很快)： http://www.acme.com/software/http_load/
 $ wget http://www.acme.com/software/http_load/http_load-09Mar2016.tar.gz
 $ tar xvf http_load-09Mar2016.tar.gz
 $ cd http_load-09Mar2016
@@ -142,4 +142,42 @@ $ make install
 $ cd ..
 $ rm -rf http_load-09Mar2016.tar.gz http_load-09Mar2016
 $ man http_load
+```
+
+```shell
+$ # 示例
+$ cat urls.txt
+http://news.baidu.com/
+http://internet.baidu.com/
+http://yule.baidu.com/
+http://fashion.baidu.com
+
+$ cat command 
+http_load -rate 1000 -fetches 100000 -timeout 150 -proxy 192.168.33.124:8118 urls.txt
+
+
+详细说明一下使用格式：
+
+./http_load [-checksum] [-throttle] [-proxy host:port] [-verbose] [timeout secs] [-sip sip_file]
+
+         -parallel N | -rate N [-jitter]
+		 -fetches N | -seconds N
+		 url_file
+
+选项与参数：
+
+-fetches：总计要访问url的次数，无论成功失败都记为一次，到达数量后程序退出。
+-rate：每秒访问的次数（即访问频率），控制性能测试的速度。最大支持1000并发（每秒）
+-seconds：工具运行的时间，到达seconds设置的时间后程序退出。
+-parallel：最大并发访问的数目，控制性能测试的速度。
+-verbose：使用该选项后，每60秒会在屏幕上打印一次当前测试的进度信息。
+-jitter：该选项必须与-rate同时使用，表示实际的访问频率会在rate设置的值上下随机波动10%的幅度。
+-checksum：由于要访问某个url很多次，为了保证每次访问时收到的服务器回包内容都一样，可以采用checksum检查，不一致会在屏幕上输出错误信息。
+-cipher：使用SSL层的时候会用到此参数（url是https开头），使用特定的密码集。
+-timeout：设置超时时间，以秒为单位，默认为60秒。每超过一次则记为一次超时的连接
+-proxy：设置web代理(HTTP)，格式为-proxy host:port
+-throttle：限流模式，限制每秒收到的数据量，单位bytes/sec。该模式下默认限制为3360bytes/sec。
+-sip：指定一个source ip文件，该文件每一行都是ip+port的形式。
+
+需要特别说明的是，-parallel参数和-rate参数中必须有一个，用于指定发请求包的方式；-fetches和-seconds两个参数必须有一个，用于指定程序的终止条件。
 ```
