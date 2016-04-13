@@ -1,5 +1,12 @@
 ### 利用 [daocloud.io](https://www.daocloud.io/)「胶囊主机」 体验 `lproxy` 远程代理服务
 
+前期准备：
+
+1. 本地需要一个 `lproxy` local 端程序：`lsslocal.exe`。
+2. 注册一个 [daocloud.io](https://www.daocloud.io/) 账号。
+
+手把手的图文教程：
+
 1. 第一步：创建试用主机
 
 	1. 进入 [daocloud.io](https://www.daocloud.io/) 控制台，点击 “我的集群” ![我的集群](./1.png)
