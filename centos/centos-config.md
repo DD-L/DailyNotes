@@ -60,8 +60,9 @@ See the help file /usr/share/doc/pam_passwdqc-1.0.2/README and the man page pam_
 $ yum install openssh-server
 $ yum update
 $ vi /etc/ssh/sshd_config
-$ # 开启sftp:
-$ Subsystem sftp /usr/lib/openssh/sftp-server
+# 开启sftp:
+Subsystem sftp /usr/lib/openssh/sftp-server
+# 好像默认即是开启的，不用更改
 $ service sshd restart
 ```
 ## gcc
