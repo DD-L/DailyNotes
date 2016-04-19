@@ -97,7 +97,7 @@
 
 		![lsslocal.exe](./20.png)
 
-	*[Windows 平台的 lproxy](https://github.com/DD-L/lproxy/releases) local 端二级制程序 `lsslocal.exe`, 使用起来更方便：修改完 `local-config.json` 当中的 `server_name` 和 `server_port` 之后，直接用鼠标双击 `lsslocal.exe` 文件即可*
+	*[Windows 平台的 lproxy](https://github.com/DD-L/lproxy/releases) local 端二进制程序 `lsslocal.exe`, 使用起来更方便：修改完 `local-config.json` 当中的 `server_name` 和 `server_port` 之后，直接用鼠标双击 `lsslocal.exe` 文件即可*
 
 4. **第四步：查明 `lsslocal.exe` 所在主机的 ip，然后让你的应用软件走 local 端的 Socks5 网络代理，比如 `socks5://127.0.0.1:8087`。设置 Socks5 代理的方法，这里就不介绍了。**
 
