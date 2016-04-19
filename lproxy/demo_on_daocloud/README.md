@@ -76,6 +76,7 @@
 		![高级设置](./16.png)
 
 	11. **指定容器启动命令 `./lssserver.exe -k` （启动 server 端程序）, 并“ 立即部署”。**
+
 		*`-k` 选项即 `--keep-running`，如果想让 `lssserver.exe` 做“不死小强”，那就添加这个选项吧 :v: （关闭由 `-k` 启动的 lproxy 服务，linux 上可以使用 `kill -9 $(ps aux | grep 'lss\w\{1,6\}\.exe' | grep -v grep | awk '{print $2}')` 命令来关闭）*
 
 		![](./17.png)
