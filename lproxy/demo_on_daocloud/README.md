@@ -2,7 +2,7 @@
 
 预先准备：
 
-1. 本地需要一个 `lproxy` local 端程序：`lsslocal.exe`。
+1. 本地需要一个 `lproxy` local 端程序：`lsslocal.exe` （[Download](https://github.com/DD-L/lproxy/releases)）。
 2. 注册一个 [daocloud.io](https://www.daocloud.io/) 账号。
 
 手把手的图文教程：
