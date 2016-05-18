@@ -127,6 +127,11 @@ filetype indent on
 ```shell
 $ yum install wget
 ```
+## net_tools (ifconfig/netstat)
+
+```
+$ yum install net-tools
+```
 
 ## http_load
 
