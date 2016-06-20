@@ -107,3 +107,7 @@
 	双击打开 stream-example.html , 或放到 一个 http 服务器里 执行。
 
 6. 以上所有出现 `你的密码` 均是一个 固定的字符串，设置密码主要是为了一定程度的防止非法偷窥视频。
+
+7. 相关文章链接：
+
+	* https://imququ.com/post/html5-live-player-2.html 
