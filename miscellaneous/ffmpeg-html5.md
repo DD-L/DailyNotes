@@ -79,7 +79,7 @@
 
 	Windows:
 	```
-	ffmpeg -s 640x480 -f dshow -i video="Integrated Camera" -f mpeg1video -b 800k -r 30 http://127.0.0.1:8082/1234/640/480
+	ffmpeg -s 640x480 -f dshow -i video="Integrated Camera" -f mpeg1video -b 800k -r 30 http://127.0.0.1:8082/你的密码/640/480
 	```
 
 	服务端和采集端可以不在同一台主机上，如不在同一主机，这里 只要将 `127.0.0.1` 修改 相应的 域名 或 ip 地址即可
@@ -105,3 +105,5 @@
 	```
 
 	双击打开 stream-example.html , 或放到 一个 http 服务器里 执行。
+
+6. 以上所有出现 `你的密码` 均是一个 固定的字符串，设置密码主要是为了一定程度的防止非法偷窥视频。
