@@ -39,11 +39,11 @@
 	
 	则表示 websocket 转发服务器启动成功。
 
-3. 查找电脑摄像头
+3. 查找电脑的摄像头设备名
 	
-	**以 Windows 为例**
+	*以 Windows 为例*
 
-	启动 ff-prompt.bat，在 FF 命令行界面
+	启动 `ff-prompt.bat`，在 FF 命令行界面
 
 	```
 	ffmpeg -list_devices true -f dshow -i dummy
@@ -60,9 +60,9 @@
 	[dshow @ 00000000006124a0]     Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{954B656C-A73C-450A-97D2-FD388711F962}"
 	```
 
-	则我的视频设备是 "Integrated Camera"
+	则我的摄像设备是 "Integrated Camera"
 
-	测试视频设备
+	测试摄像设备
 
 	```
 	ffplay -f dshow -i video="Integrated Camera"
