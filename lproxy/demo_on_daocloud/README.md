@@ -49,7 +49,7 @@
 
 	4. **部署 `deel/lproxy`。**
 
-		![部署 deel/lproxy](./10.png)
+		![部署 deel/lproxy](https://github.com/DD-L/DailyNotes/raw/master/lproxy/demo_on_daocloud/10.png)
 
 	5. **“部署最新版本”。**
 
