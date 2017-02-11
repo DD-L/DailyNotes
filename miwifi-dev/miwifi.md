@@ -343,3 +343,4 @@ external 192.168.1.4:8008 TCP is redirected to internal 192.168.2.108:80 (durati
 $ #配置好web server 后， 可以执行 upnpc  -a 192.168.2.108 8080 8009 TCP
 $ 就可以在 上一层网络访问内网的http://192.168.2.108:8080 了
 </code></pre>
+
